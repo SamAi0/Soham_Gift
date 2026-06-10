@@ -18,10 +18,10 @@ const Home = () => {
         ]);
         const products = prodRes.data.results || prodRes.data;
         // Randomly shuffle products to show a diverse selection
-        const shuffled = [...products].sort(() => 0.5 - Math.random());
+        const shuffled = Array.isArray(products) ? [...products].sort(() => 0.5 - Math.random()) : [];
         setTrendingProducts(shuffled.slice(0, 12));
         const testimonialsData = testimRes.data.results || testimRes.data;
-        setTestimonials(testimonialsData.slice(0, 3));
+        setTestimonials(Array.isArray(testimonialsData) ? testimonialsData.slice(0, 3) : []);
       } catch (error) {
         console.error("Error loading home data:", error);
       }
