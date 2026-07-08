@@ -2,6 +2,10 @@ import axios from 'axios';
 
 let API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
+if (!API_BASE_URL && import.meta.env.DEV) {
+  API_BASE_URL = 'http://127.0.0.1:8000/api';
+}
+
 // Smart IP Resolution for Mobile/Network testing
 if (typeof window !== 'undefined' && API_BASE_URL.includes('localhost') && window.location.hostname !== 'localhost') {
   console.log(`[Smart IP] Switching localhost to ${window.location.hostname}`);
