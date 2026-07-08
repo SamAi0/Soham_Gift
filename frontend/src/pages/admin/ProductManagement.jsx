@@ -39,7 +39,7 @@ const ProductManagement = () => {
         fetchCategories()
       ]);
       setProducts(prodRes.data.results || prodRes.data);
-      setCategories(catRes.data);
+      setCategories(catRes.data.results || catRes.data || []);
     } catch (err) {
       console.error("Failed to fetch data:", err);
     }

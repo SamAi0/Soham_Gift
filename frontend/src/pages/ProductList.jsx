@@ -50,7 +50,7 @@ const ProductList = () => {
       setLoading(true);
       try {
         const catRes = await fetchCategories();
-        setCategories(catRes.data);
+        setCategories(catRes.data.results || catRes.data || []);
         
         const params = {};
         if (selectedCategory) params.category = selectedCategory;
