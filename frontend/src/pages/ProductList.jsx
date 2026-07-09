@@ -408,7 +408,7 @@ const ProductList = () => {
                                    </div>
                                    <div className="flex-grow">
                                       <p className="text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">{item.name}</p>
-                                      <p className="text-[10px] text-slate-400">₹{item.price} • {item.category_name || item.type}</p>
+                                      <p className="text-[10px] text-slate-400">{parseFloat(item.price) === 0 ? "Rs. Call" : `₹${item.price}`} • {item.category_name || item.type}</p>
                                    </div>
                                 </Link>
                               ))}
@@ -515,29 +515,29 @@ const ProductList = () => {
                         </div>
 
                         <div className="p-5 flex flex-col flex-grow">
-                          <div className="flex justify-between items-start mb-2">
+                          <div className="flex justify-between items-start mb-1">
                             <p className="text-primary text-[9px] font-black uppercase tracking-widest">{product.category_name}</p>
                           </div>
-                          <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors line-clamp-2 min-h-[3rem]">
+                          <h3 className="text-base font-bold text-slate-900 mb-0.5 group-hover:text-primary transition-colors line-clamp-2">
                             {product.name}
                           </h3>
-                          <p className="text-slate-500 text-xs mb-4 line-clamp-2 leading-relaxed font-light min-h-[2.5rem]">
+                          <p className="text-slate-500 text-xs mb-1 line-clamp-2 leading-relaxed font-light">
                             {product.description}
                           </p>
                           
-                          <div className="mt-auto pt-4 border-t border-slate-50">
-                            <div className="flex items-center gap-1.5 mb-2">
-                              <div className="flex text-accent">
+                          <div className="mt-auto pt-2 border-t border-slate-50">
+                            <div className="flex items-center gap-1.5 mb-1">
+                              <div className="flex text-accent gap-0.5">
                                  {[...Array(5)].map((_, i) => (
-                                   <Star key={i} size={10} fill={i < Math.floor(product.average_rating) ? "currentColor" : "none"} className={i < Math.floor(product.average_rating) ? "text-accent" : "text-slate-200"} />
+                                   <Star key={i} size={16} fill={i < Math.floor(product.average_rating) ? "currentColor" : "none"} className={i < Math.floor(product.average_rating) ? "text-accent" : "text-slate-200"} />
                                  ))}
                               </div>
-                              <span className="text-[10px] font-black text-slate-400">({product.review_count})</span>
+                              <span className="text-xs font-bold text-slate-500">({product.review_count})</span>
                             </div>
                             
                             <div className="flex justify-between items-center">
                               <div className="flex items-center gap-2">
-                                <p className="text-xl font-bold text-slate-900 tracking-tight">₹{product.discount_price || product.price}</p>
+                                <p className="text-xl font-bold text-slate-900 tracking-tight">{parseFloat(product.discount_price || product.price) === 0 ? "Rs. Call" : `₹${product.discount_price || product.price}`}</p>
                                 {product.discount_price && (
                                   <p className="text-xs text-slate-400 line-through">₹{product.price}</p>
                                 )}
