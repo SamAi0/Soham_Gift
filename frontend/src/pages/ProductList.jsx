@@ -50,7 +50,8 @@ const ProductList = () => {
       setLoading(true);
       try {
         const catRes = await fetchCategories();
-        setCategories(catRes.data);
+        const categoryData = catRes.data;
+        setCategories(Array.isArray(categoryData) ? categoryData : (categoryData?.results || []));
         
         const params = {};
         if (selectedCategory) params.category = selectedCategory;
@@ -65,8 +66,10 @@ const ProductList = () => {
         params.page_size = 20;
         
         const prodRes = await fetchProducts(params);
-        setProducts(prodRes.data.results || prodRes.data);
-        setTotalCount(prodRes.data.count || (prodRes.data.results ? prodRes.data.results.length : prodRes.data.length));
+        const productData = prodRes.data.results || prodRes.data;
+        const productsArray = Array.isArray(productData) ? productData : [];
+        setProducts(productsArray);
+        setTotalCount(prodRes.data.count || productsArray.length);
       } catch (error) {
         console.error("Error loading products:", error);
       } finally {
@@ -82,7 +85,8 @@ const ProductList = () => {
       setIsSearching(true);
       try {
         const res = await fetchProducts({ search: searchQuery, page_size: 5 });
-        setSuggestions(res.data.results || res.data);
+        const suggestionData = res.data.results || res.data;
+        setSuggestions(Array.isArray(suggestionData) ? suggestionData : []);
       } catch (err) {
         console.error("Suggestion error", err);
       } finally {

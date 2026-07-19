@@ -38,8 +38,10 @@ const ProductManagement = () => {
         api.get('products/'),
         fetchCategories()
       ]);
-      setProducts(prodRes.data.results || prodRes.data);
-      setCategories(catRes.data);
+      const productData = prodRes.data.results || prodRes.data;
+      setProducts(Array.isArray(productData) ? productData : []);
+      const categoryData = catRes.data;
+      setCategories(Array.isArray(categoryData) ? categoryData : (categoryData?.results || []));
     } catch (err) {
       console.error("Failed to fetch data:", err);
     }
