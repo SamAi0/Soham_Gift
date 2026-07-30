@@ -177,7 +177,7 @@ const ProductDetail = () => {
       // Fetch Trending Products for the bottom section
       const trendingRes = await api.get('/products/', { params: { is_trending: 'true' } });
       const trendingData = trendingRes.data.results || trendingRes.data;
-      setTrendingProducts(trendingData.filter(p => p.id !== productData.id).slice(0, 4));
+      setTrendingProducts(trendingData.filter(p => p.id !== productData.id).slice(0, 8));
 
       // Set random header for variety
       const titles = ['Popular Picks', 'Top Rated Gifts', 'Customers Loved', 'Trending Now'];
@@ -1008,6 +1008,11 @@ const ProductDetail = () => {
                     </div>
                   </Link>
                 ))}
+              </div>
+              <div className="mt-12 flex justify-center">
+                <Link to="/products" className="btn-outline border-slate-200 text-slate-900 hover:bg-primary hover:text-white hover:border-primary py-4 px-10 rounded-full font-bold transition-all shadow-sm flex items-center gap-2">
+                  View More Gifts <ChevronRight size={18} />
+                </Link>
               </div>
             </div>
           )}
