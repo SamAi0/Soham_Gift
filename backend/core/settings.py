@@ -39,7 +39,7 @@ if 'RENDER' in os.environ:
     DEBUG = False
     ENVIRONMENT = 'production'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,gifting-82j5.onrender.com,.netlify.app').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,soham-gift.onrender.com,.netlify.app').split(',')
 ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
 
 
@@ -164,7 +164,7 @@ CORS_ALLOWED_ORIGINS = [origin.strip().rstrip('/') for origin in CORS_ALLOWED_OR
 # Also add CSRF trusted origins for Django 4.x
 CSRF_TRUSTED_ORIGINS = os.getenv(
     'CSRF_TRUSTED_ORIGINS',
-    'https://giftingsam.netlify.app,https://gifting-82j5.onrender.com,https://*.netlify.app'
+    'https://soham-gifting.netlify.app,https://soham-gift.onrender.com,https://*.netlify.app'
 ).split(',')
 CSRF_TRUSTED_ORIGINS = [origin.strip().rstrip('/') for origin in CSRF_TRUSTED_ORIGINS if origin.strip()]
 
