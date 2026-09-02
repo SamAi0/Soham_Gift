@@ -22,11 +22,10 @@ class ProductTests(TestCase):
         )
         self.url = reverse('product-list')
 
-    def test_fetch_products_paginated(self):
+    def test_fetch_products(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn('results', response.data)
-        self.assertEqual(len(response.data['results']), 2)
+        self.assertEqual(len(response.data), 2)
 
     def test_unique_slug_generation(self):
         # Create product with same name

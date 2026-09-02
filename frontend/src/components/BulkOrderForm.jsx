@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Building2, Mail, Phone, Users, Package, ArrowRight, MessageCircle } from 'lucide-react';
+import { Building2, Users, Package, ArrowRight, MessageCircle } from 'lucide-react';
 import { submitBulkOrder } from '../api';
 
 const BulkOrderForm = () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Gift, ShieldCheck, Truck, Clock, ArrowRight, Star, ChevronRight, CheckCircle2, User } from 'lucide-react';
-import { fetchProducts, fetchTestimonials, getImageUrl } from '../api';
+import { fetchProducts, getImageUrl } from '../api';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 
@@ -11,21 +11,16 @@ const logosArray = Object.values(clientLogos).map(module => module.default);
 
 const Home = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
+
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [prodRes, testimRes] = await Promise.all([
-          fetchProducts({ page_size: 24 }), // Fetch enough products for variety
-          fetchTestimonials()
-        ]);
+        const prodRes = await fetchProducts({ page_size: 24 }); // Fetch enough products for variety
         const products = prodRes.data.results || prodRes.data;
         // Randomly shuffle products to show a diverse selection
         const shuffled = [...products].sort(() => 0.5 - Math.random());
         setTrendingProducts(shuffled.slice(0, 12));
-        const testimonialsData = testimRes.data.results || testimRes.data;
-        setTestimonials(testimonialsData.slice(0, 3));
       } catch (error) {
         console.error("Error loading home data:", error);
       }
